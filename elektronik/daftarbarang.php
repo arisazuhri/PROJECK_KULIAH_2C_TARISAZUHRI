@@ -29,7 +29,7 @@ while ($record = mysqli_fetch_array($query)) {
                         <div class="modal-body">
                             <form class="needs-validation" novalidate action="proses/proses_input_barang.php" method="POST">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="floatingInput" placeholder="Your Name" name="namabarang" required>
                                             <label for="floatingInput">Nama Barang</label>
@@ -38,28 +38,16 @@ while ($record = mysqli_fetch_array($query)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control" id="floatingInput" placeholder="id_barang" name="id_barang">
-                                            <label for="floatingInput">ID_Barang</label>
+                                            <label for="floatingInput">ID Barang</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control" id="floatingInput" placeholder="biaya" name="biaya">
                                             <label for="floatingInput">BIAYA</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="floatingInput" placeholder="tglservis" name="tglservis">
-                                            <label for="floatingInput">TGL Servis</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="floatingInput" placeholder="tglselesai_servis" name="tglselesai_servis">
-                                            <label for="floatingInput">TGL Selesai Servis</label>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +147,7 @@ while ($record = mysqli_fetch_array($query)) {
                             <form class="needs-validation" novalidate action="proses/proses_edit_barang.php" method="POST">
                                 <input type="hidden" value="<?php echo $row['id_barang'] ?>" name="id_barang">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="floatingInput" placeholder="Your Name" name="namabarang" required value="<?php echo $row['namabarang'] ?>">
                                             <label for="floatingInput">Nama Barang</label>
@@ -168,28 +156,16 @@ while ($record = mysqli_fetch_array($query)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control" id="floatingInput" placeholder="id_barang" name="id_barang" value="<?php echo $row['id_barang'] ?>">
                                             <label for="floatingInput">ID_Barang</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control" id="floatingInput" placeholder="biaya" name="biaya" value="<?php echo $row['biaya'] ?>">
                                             <label for="floatingInput">Biaya</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="floatingInput" placeholder="tglservis" name="tglservis" value="<?php echo $row['biaya'] ?>">
-                                            <label for="floatingInput">TGL Servis</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="floatingInput" placeholder="tglselesai_servis" name="tglselesai_servis" value="<?php echo $row['tglselesai_servis'] ?>">
-                                            <label for="floatingInput">TGL Selesai Servis</label>
                                         </div>
                                     </div>
                                 </div>
@@ -253,6 +229,7 @@ while ($record = mysqli_fetch_array($query)) {
                             <th scope="col">Nama Barang</th>
                             <th scope="col">Biaya</th>
                             <th scope="col">Tgl Servis</th>
+                            <th scope="col">Tgl Selesai Servis</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -269,6 +246,7 @@ while ($record = mysqli_fetch_array($query)) {
                                 <td><?php echo $row['namabarang'] ?></td>
                                 <td><?php echo $row['biaya'] ?></td>
                                 <td><?php echo $row['tglservis'] ?></td>
+                                <td><?php echo $row['tglselesai_servis'] ?></td>
                                 <!--berfungsi untuk menggambil nilai dari database-->
                                 <td class="d-flex">
                                     <button class="btn btn-info btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalView<?php echo $row['id_barang'] ?>"><i class="bi bi-eye"></i></button>

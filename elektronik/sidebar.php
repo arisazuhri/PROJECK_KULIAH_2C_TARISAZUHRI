@@ -25,7 +25,7 @@
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x'] == 'daftarbarang') ? 'active link-light' : 'link-dark'; ?>" href="daftarbarang"><i class="bi bi-journal-text"></i> Daftar Barang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x'] == 'pelanggan') ? 'active link-light' : 'link-dark'; ?>" href="pelanggan"><i class="bi bi-person-vcard"></i> Pelanggan</a>
+                            <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x'] == 'order') ? 'active link-light' : 'link-dark'; ?>" href="order"><i class="bi bi-person-vcard"></i> Pelanggan</a>
                         </li>
                         <?php if($hasil['status']==1){?> 
                         <li class="nav-item">

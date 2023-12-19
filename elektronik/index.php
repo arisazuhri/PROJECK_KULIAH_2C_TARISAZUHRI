@@ -4,26 +4,17 @@
                 $page = "home.php";
                 include "main.php";
 
-            } elseif (isset($_GET['x']) && $_GET['x'] == 'pelanggan') {
+            } elseif (isset($_GET['x']) && $_GET['x'] == 'order') {
                 if ($_SESSION['status_elektronik'] == 1 || $_SESSION['status_elektronik'] == 2) {
-                $page = "pelanggan.php";
+                $page = "order.php";
                 include "main.php";
             } else {
                 $page = "home.php";
                 include "main.php";
             } 
 
-        } elseif (isset($_GET['x']) && $_GET['x'] == 'user') {
-            if ($_SESSION['status_elektronik'] == 1) {
-                $page = "user.php";
-                include "main.php";
-            } else {
-                $page = "home.php";
-                include "main.php";
-            }
 
-
-        } elseif (isset($_GET['x']) && $_GET['x'] == 'daftarbarang') { //ambil punya order
+        } elseif (isset($_GET['x']) && $_GET['x'] == 'daftarbarang') { //ambil punya user
             if ($_SESSION['status_elektronik'] == 1 || $_SESSION['status_elektronik'] == 2) {
                 $page = "daftarbarang.php";
                 include "main.php";
@@ -33,9 +24,9 @@
             }
 
                 
-            } elseif (isset($_GET['x']) && $_GET['x'] == 'itempelanggan') { //pasangan pelanggan
+            } elseif (isset($_GET['x']) && $_GET['x'] == 'order_item') { //pasangan pelanggan
                 if ($_SESSION['status_elektronik'] == 1 || $_SESSION['status_elektronik'] == 2) {
-                $page = "item_pelanggan.php";
+                $page = "order_item.php";
                 include "main.php";
             } else {
                 $page = "home.php";
@@ -69,7 +60,7 @@
                 }
 
             } elseif (isset($_GET['x']) && $_GET['x'] == 'viewitem') {
-                if ($_SESSION['level_decafe'] == 1) {
+                if ($_SESSION['status_elektronik'] == 1) {
                 $page = "view_item.php";
                 include "main.php";
             } else {
