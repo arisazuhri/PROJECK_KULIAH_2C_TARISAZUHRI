@@ -1,19 +1,16 @@
 <?php
 include "proses/connect.php";
-date_default_timezone_set('asia/jakarta');
-$query = mysqli_query($conn, "SELECT tb_order.*, tb_bayar.*, SUM(harga * jumlah) AS harganya 
-    FROM tb_order 
-    LEFT JOIN tb_list_order ON tb_list_order.kodebarang = tb_order.idpelanggan
-    LEFT JOIN tb_daftar_barang ON tb_daftar_barang.id_barang = tb_list_order.barang 
-    LEFT JOIN tb_bayar ON tb_bayar.id_bayar = tb_order.idpelanggan
-    GROUP BY tb_order.idpelanggan, tb_bayar.id_bayar 
-    ORDER BY tb_order.waktubayar DESC");
+
+$query = mysqli_query($conn, "SELECT tb_order.*, SUM(tb_daftar_barang.biaya * tb_list_order.jumlah) AS biayanya
+    FROM tb_order LEFT JOIN tb_list_order ON tb_list_order.kodebarang = tb_order.idpelanggan
+    LEFT JOIN tb_daftar_barang ON tb_daftar_barang.id_barang = tb_list_order.barang
+    GROUP BY tb_order.idpelanggan ");
 
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
-//$select_kat_menu = mysqli_query($conn, "SELECT id_kat_menu,kategori_menu FROM tb_kategori_menu");
 ?>
+
 
 
 <!--content-->
@@ -40,7 +37,7 @@ while ($record = mysqli_fetch_array($query)) {
                         <div class="modal-body">
                             <form class="needs-validation" novalidate action="proses/proses_input_order.php" method="POST">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="number" class="form-control" id="uploadfoto" name="kodebarang" value="<?php echo date('ymdHi') . rand(100, 999) ?>" readonly>
                                             <label for="uploadfoto">kode Barang</label>
@@ -49,16 +46,17 @@ while ($record = mysqli_fetch_array($query)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
-                                            <input type="number" class="form-control" id="nohp_pelanggan" placeholder="nohp_pelanggan" name="nohp_pelanggan" required>
-                                            <label for="nohp_pelanggan">nohp pelanggan</label>
+                                            <input type="tel" class="form-control" id="nohp" placeholder="nohp_pelanggan" name="nohp" pattern="[0-9]+" required>
+                                            <label for="nohp">No. HP Pelanggan</label>
                                             <div class="invalid-feedback">
-                                                masukkan nohp pelanggan.
+                                                Masukkan nohp pelanggan dengan format yang benar.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="namapelanggan" placeholder="namapelanggan" name="namapelanggan" required>
                                             <label for="namapelanggan">nama pelanggan</label>
@@ -67,12 +65,21 @@ while ($record = mysqli_fetch_array($query)) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="alamatpelanggan" placeholder="alamatpelanggan" name="alamatpelanggan" required>
                                             <label for="alamatpelanggan">Alamat Pelanggan</label>
                                             <div class="invalid-feedback">
                                                 masukkan Alamat Pelanggan.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="harga" placeholder="harga" name="harga" required>
+                                            <label for="harga">Harga</label>
+                                            <div class="invalid-feedback">
+                                                masukkan Harga.
                                             </div>
                                         </div>
                                     </div>
@@ -106,9 +113,9 @@ while ($record = mysqli_fetch_array($query)) {
                                 <div class="modal-body">
                                     <form class="needs-validation" novalidate action="proses/proses_edit_order.php" method="POST">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-3">
                                                 <div class="form-floating mb-3">
-                                                    <input readonly type="number" class="form-control" id="uploadfoto" name="kodebarang" value="<?php echo $row['id_barang'] ?>" readonly>
+                                                    <input readonly type="text" class="form-control" id="uploadfoto" name="kodebarang" value="<?php echo $row['idpelanggan'] ?>" readonly>
                                                     <label for="uploadfoto">kode Barang</label>
                                                     <div class="invalid-feedback">
                                                         masukkan kode Barang
@@ -187,12 +194,11 @@ while ($record = mysqli_fetch_array($query)) {
                         <thead>
                             <tr class="text-nowrap">
                                 <th scope="col">No</th>
-                                <th scope="col">ID Pelanggan</th>
-                                <th scope="col">Nama Pelanggan</th>
                                 <th scope="col">Kode Barang</th>
+                                <th scope="col">Nama Pelanggan</th>
                                 <th scope="col">Alamat Pelanggan</th>
                                 <th scope="col">NoHp Pelanggan</th>
-                                <th scope="col">Harga</th>
+                                <th scope="col">Total Harga</th>
                                 <th scope="col">Riwayat</th>
                                 <th scope="col">Waktu Bayar</th>
                                 <th scope="col">Aksi</th>
@@ -215,19 +221,16 @@ while ($record = mysqli_fetch_array($query)) {
                                         <?php echo $row['alamatpelanggan'] ?>
                                     </td>
                                     <td>
-                                        <?php echo number_format((int)$row['harganya'], 0, ',', '.') ?>
-                                    </td>
-                                    <td>
                                         <?php echo $row['nohp_pelanggan'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['harga'] ?>
+                                        <?php echo $row['biayanya'] ?>
                                     </td>
                                     <td>
-                                        <?php echo (!empty($row['id_bayar'])) ? "<span class='badge text-bg-success'>dibayar</span>" : ""; ?>
+                                        <?php echo $row['riwayat'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['waktu_bayar'] ?>
+                                        <?php echo $row['waktubayar'] ?>
                                     </td>
                                     <td>
                                         <div class="d-flex">

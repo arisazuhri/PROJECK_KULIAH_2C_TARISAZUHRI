@@ -10,7 +10,7 @@ if(!empty($_POST['input_barang_validate'])){
         $message = '<script>alert("nama barang yang dimasukkan telah ada");
         window.location="../daftarbarang"</script>';
     }else{
-    $query = mysqli_query($conn, "INSERT INTO tb_daftar_barang (namabarang,id_barang,biaya) values ('$name','$id_barang','$biaya')");
+    $query = mysqli_query($conn, "INSERT INTO tb_daftar_barang (namabarang,biaya) values ('$name','$biaya')");
     if($query){
         $message = '<script>alert("Data berhasil dimasukkan");
         window.location="../daftarbarang"</script>';

@@ -7,7 +7,7 @@ $namapelanggan = (isset($_POST['namapelanggan'])) ? htmlentities($_POST['namapel
 $alamatpelanggan = (isset($_POST['alamatpelanggan'])) ? htmlentities($_POST['alamatpelanggan']) : "";
 
 if(!empty($_POST['edit_order_validate'])){ 
-    $query = mysqli_query($conn, "UPDATE tb_order SET nohp_pelanggan='$nohp_pelanggan',namapelanggan='$namapelanggan', alamatpelanggan='$alamatpelanggan' WHERE id_pelanggan = $kodebarang");
+    $query = mysqli_query($conn, "UPDATE tb_order SET namapelanggan='$namapelanggan',alamatpelanggan='$alamatpelanggan' WHERE idpelanggan = $kodebarang");
     if($query) {
         $message = '<script>alert("Data berhasil dimasukkan");
         window.location="../order"</script>';
@@ -17,3 +17,5 @@ if(!empty($_POST['edit_order_validate'])){
         window.location="../order"</script>';
     }
 }echo $message;
+?>
+

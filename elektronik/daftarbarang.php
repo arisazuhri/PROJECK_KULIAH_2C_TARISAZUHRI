@@ -1,9 +1,18 @@
 <?php
 include "proses/connect.php";
 $query = mysqli_query($conn, "SELECT * FROM tb_daftar_barang");
+
+
+// $result[] = 0;
 while ($record = mysqli_fetch_array($query)) {
     $result[] = $record;
 }
+
+// if(isset($result)){
+//     $result=0;
+// }
+
+// exit();
 ?>
 
 <div class="col-lg-9 mt-2">
@@ -64,6 +73,9 @@ while ($record = mysqli_fetch_array($query)) {
         <!-- akhir Modal tambah barang -->
 
         <?php
+        if (empty($result)) {
+            echo "Data barang tidak ada";
+        } else {
         foreach ($result as $row) {
         ?>
 
@@ -171,7 +183,7 @@ while ($record = mysqli_fetch_array($query)) {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-danger" name="input_barang_validate" value="12345">Save</button>
+                                    <button type="submit" class="btn btn-danger" name="edit_barang_validate" value="12345">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -215,9 +227,7 @@ while ($record = mysqli_fetch_array($query)) {
 
         <?php
         }
-        if (empty($result)) {
-            echo "Data barang tidak ada";
-        } else {
+        
         ?>
 
             <div class="table-responsive mt-2">
@@ -240,20 +250,20 @@ while ($record = mysqli_fetch_array($query)) {
                         foreach ($result as $row) {
                         ?>
 
-                            <tr>
-                                <th scope="row"><?php echo $no++ ?></th>
-                                <td><?php echo $row['id_barang'] ?></td>
-                                <td><?php echo $row['namabarang'] ?></td>
-                                <td><?php echo $row['biaya'] ?></td>
-                                <td><?php echo $row['tglservis'] ?></td>
-                                <td><?php echo $row['tglselesai_servis'] ?></td>
-                                <!--berfungsi untuk menggambil nilai dari database-->
-                                <td class="d-flex">
-                                    <button class="btn btn-info btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalView<?php echo $row['id_barang'] ?>"><i class="bi bi-eye"></i></button>
-                                    <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['id_barang'] ?>"><i class="bi bi-pencil-square"></i></button>
-                                    <button class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#Modaldelete<?php echo $row['id_barang'] ?>"><i class="bi bi-trash3-fill"></i></button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th scope="row"><?php echo $no++ ?></th>
+                                    <td><?php echo $row['id_barang'] ?></td>
+                                    <td><?php echo $row['namabarang'] ?></td>
+                                    <td><?php echo $row['biaya'] ?></td>
+                                    <td><?php echo $row['tglservis'] ?></td>
+                                    <td><?php echo $row['tglselesai_servis'] ?></td>
+                                    <!--berfungsi untuk menggambil nilai dari database-->
+                                    <td class="d-flex">
+                                        <button class="btn btn-info btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalView<?php echo $row['id_barang'] ?>"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['id_barang'] ?>"><i class="bi bi-pencil-square"></i></button>
+                                        <button class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#Modaldelete<?php echo $row['id_barang'] ?>"><i class="bi bi-trash3-fill"></i></button>
+                                    </td>
+                                </tr>
                         <?php
                         }
                         ?>

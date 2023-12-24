@@ -24,7 +24,7 @@
             }
 
                 
-            } elseif (isset($_GET['x']) && $_GET['x'] == 'order_item') { //pasangan pelanggan
+            } elseif (isset($_GET['x']) && $_GET['x'] == 'orderitem') { //pasangan pelanggan
                 if ($_SESSION['status_elektronik'] == 1 || $_SESSION['status_elektronik'] == 2) {
                 $page = "order_item.php";
                 include "main.php";
@@ -41,6 +41,16 @@
                     $page = "home.php";
                     include "main.php";
                 }
+
+            } elseif (isset($_GET['x']) && $_GET['x'] == 'perbaikan') {
+                if ($_SESSION['status_elektronik'] == 1 || $_SESSION['status_elektronik'] == 2) {
+                    $page = "perbaikan.php";
+                    include "main.php";
+                } else {
+                    $page = "home.php";
+                    include "main.php";
+                }
+
             } elseif (isset($_GET['x']) && $_GET['x'] == 'laporanharian') {
                 if ($_SESSION['status_elektronik'] == 1) {
                     $page = "laporanharian.php";
